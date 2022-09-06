@@ -4,29 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class patient {
+public class PatientRecord {
     @Id
-    private Long id;
+    private Integer id;
 
     private Integer age;
     private String name;
     private String address;
 
-    public patient(Long id, Integer age, String name, String address) {
+    public PatientRecord(Integer id, Integer age, String name, String address) {
         this.id = id;
         this.age=age;
         this.name = name;
         this.address = address;
     }
 
-    public patient() {
+    public PatientRecord() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.model.patient;
+import com.example.model.PatientRecord;
 import com.example.repositories.PatientRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,38 +8,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="*")
 public class PatientRecordController {
     @Autowired
-    PatientRecordRepository patientRepository;
+    PatientRecordRepository patientRecordRepository;
 
-    @GetMapping("/patients")
-    public List<patient> getAllPatients() {
-        return patientRepository.findAll();
+    @GetMapping("/listPatients")
+    public List<PatientRecord> getAllPatients() {
+
+        return patientRecordRepository.findAll();
     }
 
-    @GetMapping("/patients/{id}")
-    public patient getPatient(@PathVariable Integer id) {
-        return patientRepository.findById(id).get();
+    @GetMapping("/patient/{id}")
+    public PatientRecord getPatient(@PathVariable Integer id) {
+        return patientRecordRepository.findById(id).get();
     }
 
     @PostMapping("/patient")
-    public List<patient> addPatient(@RequestBody patient patient1) {
-        patientRepository.save(patient1);
-        return patientRepository.findAll();
+    public List<PatientRecord> addPatient(@RequestBody PatientRecord patient) {
+        patientRecordRepository.save(patient);
+        return patientRecordRepository.findAll();
     }
 
-    @PutMapping("/patient/{id}")
-    public List<patient> updatePatient(@RequestBody patient patient1, @PathVariable Integer id) {
-        patient patientObj = patientRepository.findById(id).get();
-        patientObj.setName(patient1.getName());
-        patientObj.setAddress(patient1.getAddress());
-        patientRepository.save(patientObj);
-        return patientRepository.findAll();
+    @PutMapping("/patients/{id}")
+    public List<PatientRecord> updatePatient(@RequestBody PatientRecord patientRecord, @PathVariable Integer id) {
+        PatientRecord patientRecordObj = patientRecordRepository.findById(id).get();
+        patientRecordObj.setName(patientRecord.getName());
+        patientRecordObj.setAddress(patientRecord.getAddress());
+        patientRecordRepository.save(patientRecordObj);
+        return patientRecordRepository.findAll();
     }
 
     @DeleteMapping("/patient/{id}")
-    public List<patient> deleteStudent(@PathVariable Integer id) {
-        patientRepository.delete(patientRepository.findById(id).get());
-        return patientRepository.findAll();
+    public List<PatientRecord> deleteStudent(@PathVariable Integer id) {
+        patientRecordRepository.delete(patientRecordRepository.findById(id).get());
+        return patientRecordRepository.findAll();
     }
 }
