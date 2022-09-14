@@ -1,2 +1,5 @@
-package com.example;public class SecurityConfig {
+package com.example;
+
+public class SecurityConfig
+{
 }
